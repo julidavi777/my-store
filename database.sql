@@ -32,7 +32,7 @@ CREATE TABLE `users`
  `address`  varchar(100) NOT NULL ,
  `email`    varchar(100) NOT NULL ,
  `password` varchar(100) NOT NULL ,
- `id_card`  int NOT NULL ,
+ `id_card`  int  ,
 
 PRIMARY KEY (`id_user`),
 UNIQUE KEY `AK1_users` (`email`),
