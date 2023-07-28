@@ -6,8 +6,9 @@ import { Router } from "express";
 const routes = new Router();
 
 // Add routes
-routes.get("/product");
+routes.get("/products");
 routes.get("/product/add");
+routes.get("/product/:id");
 // routes.post('/', SessionController.store);
 // routes.put('/', SessionController.store);
 // routes.delete('/', SessionController.store);
