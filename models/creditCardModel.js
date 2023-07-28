@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes }from"sequelize";
-const sequelize = new Sequelize('sqlite::memory:');
+const sequelize = new Sequelize('mariadb::memory:');
 
-const User = sequelize.define('User', {
+const CreditCard = sequelize.define('CreditCard', {
   // Model attributes are defined here
   
   number: {
@@ -19,7 +19,7 @@ const User = sequelize.define('User', {
     allowNull: false
   },
   enterprise: {
-    type: Datatypes.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
     validate:{
         isIn:
@@ -30,7 +30,7 @@ const User = sequelize.define('User', {
     }
   },
   cvc: {
-    type: Datatypes.STRING(5),
+    type: DataTypes.STRING(5),
     allowNull: false
   }
 }, {
@@ -38,4 +38,5 @@ const User = sequelize.define('User', {
 });
 
 // `sequelize.define` also returns the model
-console.log(User === sequelize.models.User); // true
+console.log(CreditCard === sequelize.models.CreditCard); // true
+export default CreditCard; 

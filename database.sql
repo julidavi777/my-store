@@ -1,15 +1,35 @@
+CREATE TABLE `categories` (
+  `id_category` int NOT NULL AUTO_INCREMENT,
+  `name`        varchar(50) NOT NULL,
+
+  PRIMARY KEY (`id_category`)
+);
+
 CREATE TABLE `products`
 (
  `id_product`  int NOT NULL AUTO_INCREMENT ,
- `category`    varchar(50) NOT NULL ,
+ `category_id` int NOT NULL, 
+ `photo`    varchar(50),
  `description` varchar(100) NOT NULL ,
  `name`        varchar(100) NOT NULL ,
  `quantity`    int NOT NULL DEFAULT 0 ,
  `price`       decimal(10, 2) NOT NULL ,
 
 PRIMARY KEY (`id_product`)
+  FOREIGN KEY (`category_id`) REFERENCES `categories` (`id_category`)
 );
 
+CREATE TABLE `category`
+(
+ `id_category`  int NOT NULL AUTO_INCREMENT ,
+ `category`    varchar(50) NOT NULL ,
+ `name`        varchar(100) NOT NULL ,
+
+PRIMARY KEY (`id_category`),
+UNIQUE KEY `AK1_users` (`email`),
+KEY `FK_1` (`id_card`),
+CONSTRAINT `FK_5_1` FOREIGN KEY `FK_1` (`id_card`) REFERENCES `credit_card` (`id_card`)
+);
 
 CREATE TABLE `credit_card`
 (
@@ -26,7 +46,9 @@ UNIQUE KEY `AK1_users` (`enterprise`)
 -------------------------------PENDIENTE 
 CREATE TABLE `users`
 (
+
  `id_user`  int NOT NULL AUTO_INCREMENT ,
+ `photo`     varchar(50),
  `name`     varchar(50) NOT NULL ,
  `lastname` varchar(50) NOT NULL ,
  `address`  varchar(100) NOT NULL ,
