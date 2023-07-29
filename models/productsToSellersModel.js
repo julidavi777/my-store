@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes }from"sequelize";
-const sequelize = new Sequelize('sqlite::memory:');
+const sequelize = new Sequelize('mariadb::memory:');
 
-const User = sequelize.define('products_to_sellers', {
+const ProductToSellers = sequelize.define('products_to_sellers', {
   // Model attributes are defined here
   date:{
     type: DataTypes.DATE,
@@ -28,7 +28,7 @@ const User = sequelize.define('products_to_sellers', {
   
   
   enterprise: {
-    type: Datatypes.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
     validate:{
         isIn:
@@ -39,7 +39,7 @@ const User = sequelize.define('products_to_sellers', {
     }
   },
   cvc: {
-    type: Datatypes.STRING(5),
+    type: DataTypes.STRING(5),
     allowNull: false
   }
 }, {
@@ -47,4 +47,5 @@ const User = sequelize.define('products_to_sellers', {
 });
 
 // `sequelize.define` also returns the model
-console.log(User === sequelize.models.User); // true
+console.log(ProductToSellers === sequelize.models.ProductToSellers); // true
+export default ProductToSellers; 

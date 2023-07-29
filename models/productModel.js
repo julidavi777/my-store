@@ -1,53 +1,30 @@
 import { Sequelize, DataTypes }from"sequelize";
-const sequelize = new Sequelize('sqlite::memory:');
+const sequelize = new Sequelize('mariadb::memory:');
 
-const User = sequelize.define('User', {
+const Product = sequelize.define('Product', {
   // Model attributes are defined here
   
-  category: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-        isIn: [
-            'vehicles',
-            'supermarket',
-            'technology',
-            'appliances',
-            'Home & Furniture',
-            'Sports & Fitness',
-            'Beauty & personal Care',
-            'Vehicle Accesories',
-            'Tools',
-            'Construction',
-            'Properties',
-            'Internacional Purchase',
-            'Fashion',
-            'Games & toys',
-            'Babies',
-            'Sustainable Products',
-            'Health and Medical Equipment',
-            'Industries and Offices',
-            'Services',
-            'Official stores',
-        ],
-    }
-  },
+
   description: {
     type: DataTypes.STRING,
     allowNull: false
 
     // allowNull defaults to true
   },
+  photo:{
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   name:{
     type: DataTypes.STRING,
     allowNull: false
   },
   quantity: {
-    type: Datatypes.INT,
+    type: DataTypes.INT,
     allowNull: false
   },
   price: {
-    type: Datatypes.DECIMAL,
+    type: DataTypes.DECIMAL,
     allowNull: false
   }
 }, {
@@ -55,4 +32,5 @@ const User = sequelize.define('User', {
 });
 
 // `sequelize.define` also returns the model
-console.log(User === sequelize.models.User); // true
+console.log(Product === sequelize.models.Product); // true
+export default Product; 
