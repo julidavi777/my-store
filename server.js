@@ -1,9 +1,14 @@
 import {Sequelize} from "sequelize";
+import ejs from "ejs"; 
 import  dotenv  from "dotenv/config"
 import express  from "express"
-import  mariadb from "mariadb"
-const {PORT = 3000} = process.env;
+ import path, { dirname } from "path"
+import { fileURLToPath } from 'url';
+import { title } from "process";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const {PORT = 3000} = process.env;
 const app = express();
 
 const sequelize = new Sequelize(process.env.MDB_DATABASE,process.env.MDB_USER,process.env.MDB_PASSWORD, {
@@ -15,39 +20,32 @@ const sequelize = new Sequelize(process.env.MDB_DATABASE,process.env.MDB_USER,pr
 
 try {
   await sequelize.authenticate();
-  console.log('Connection has been established successfully.');
+  console.log('database conected.');
 } catch (error) {
   console.error('Unable to connect to the database:', error);
 }
 
+app.use(express.static(path.join(__dirname, 'public')))
+ 
+app.set('view engine', 'ejs');
+app.set('views',path.join(__dirname, '/src/views/')); 
 
-/* 
- async function main() {
-  let conn;
+app.get('/', function(req, res) {
+  res.render('users/login', {title: 'Inicia sesión '});
+});
 
-  try {
-     conn = await mariadb.createConnection({
-        host: process.env.MDB_HOST,
-        port: process.env.MDB_PORT,
-        user: process.env.MDB_USER,
-        password: process.env.MDB_PASSWORD,
-        database: process.env.MDB_DATABASE
-     });
-     console.log('dabatase connection success');
+app.get('/signup', function(req, res) {
+  res.render('users/signup', {title: 'Registrate aqui!'});
+});
+
+app.get('/products', function(req, res) {
+  res.render('products/index', {title: 'Productos'});
+});
 
 
-  } catch (err) {
-     console.log("SQL error in establishing a connection: ", err);
-  } finally {
-     if (conn) conn.close();
-  }
-}
-
-main();
- */
-
+console.log(path.join(__dirname, 'src/views'));
 app.listen(PORT, () => {
-  console.log(`Server listening at http://localhost:${PORT}/`);
+  console.log(`server on port: ${PORT}/`);
 });
 
 
