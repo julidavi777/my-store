@@ -2,7 +2,7 @@ import {Sequelize} from "sequelize";
 import ejs from "ejs"; 
 import  dotenv  from "dotenv/config"
 import express  from "express"
- import path, { dirname } from "path"
+import path, { dirname } from "path"
 import { fileURLToPath } from 'url';
 import { title } from "process";
 
